@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
+import { Star, Users, Trophy, Sparkles, Shield, Zap } from "lucide-react";
 import OperationCard from "@/components/OperationCard";
 import PracticeScreen from "@/components/PracticeScreen";
 import StoreButtons from "@/components/StoreButtons";
 import { Operation, generateQuestions, Question } from "@/lib/mathUtils";
-import { Apple, Play } from "lucide-react";
 
 const Index = () => {
   const [selectedOperation, setSelectedOperation] = useState<Operation | null>(null);
@@ -52,6 +52,7 @@ const Index = () => {
       <PracticeScreen
         operation={selectedOperation}
         questions={questions}
+        wholeNumbersOnly={wholeNumbersOnly}
         onBack={handleBack}
         onReset={handleReset}
         onAnswer={handleAnswer}
@@ -60,41 +61,124 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background px-4 py-8">
-      <div className="container max-w-md mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-primary font-nunito mb-2">
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <div className="px-4 pt-8 pb-6">
+        <div className="container max-w-md mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-addition/10 text-addition px-4 py-2 rounded-full mb-4">
+            <Sparkles className="w-4 h-4" />
+            <span className="text-sm font-bold">#1 Math App for Kids</span>
+          </div>
+          
+          <h1 className="text-4xl md:text-5xl font-extrabold text-primary font-nunito mb-3">
             Math Learning App
           </h1>
-          <p className="text-lg text-muted-foreground font-nunito">
+          <p className="text-lg text-muted-foreground font-nunito mb-6">
             Choose an operation to practice
           </p>
-        </div>
 
-        {/* Whole Numbers Toggle */}
-        <div className="bg-secondary/80 rounded-2xl px-5 py-4 mb-6 flex items-center justify-between">
-          <span className="text-lg font-semibold text-foreground">Whole numbers only</span>
-          <Switch
-            checked={wholeNumbersOnly}
-            onCheckedChange={setWholeNumbersOnly}
-          />
+          {/* Trust Badges */}
+          <div className="flex flex-wrap justify-center gap-4 mb-6">
+            <div className="flex items-center gap-1.5 bg-card px-3 py-1.5 rounded-full shadow-sm">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 text-subtraction fill-subtraction" />
+                ))}
+              </div>
+              <span className="text-sm font-bold text-foreground">4.9</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-card px-3 py-1.5 rounded-full shadow-sm">
+              <Users className="w-4 h-4 text-multiplication" />
+              <span className="text-sm font-bold text-foreground">2M+ Kids</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-card px-3 py-1.5 rounded-full shadow-sm">
+              <Trophy className="w-4 h-4 text-addition" />
+              <span className="text-sm font-bold text-foreground">Top Rated</span>
+            </div>
+          </div>
         </div>
+      </div>
 
-        {/* Operation Cards */}
-        <div className="space-y-4 mb-10">
-          <OperationCard operation="addition" onClick={() => handleOperationSelect("addition")} />
-          <OperationCard operation="subtraction" onClick={() => handleOperationSelect("subtraction")} />
-          <OperationCard operation="multiplication" onClick={() => handleOperationSelect("multiplication")} />
-          <OperationCard operation="division" onClick={() => handleOperationSelect("division")} />
-        </div>
+      {/* Main Content */}
+      <div className="px-4 pb-8">
+        <div className="container max-w-md mx-auto">
+          {/* Whole Numbers Toggle */}
+          <div className="bg-secondary/80 rounded-2xl px-5 py-4 mb-6 flex items-center justify-between">
+            <span className="text-lg font-semibold text-foreground">Whole numbers only</span>
+            <Switch
+              checked={wholeNumbersOnly}
+              onCheckedChange={setWholeNumbersOnly}
+            />
+          </div>
 
-        {/* Store Buttons */}
-        <div className="pt-4 border-t border-border">
-          <p className="text-center text-muted-foreground mb-4 font-nunito">
-            Download the full app
-          </p>
-          <StoreButtons />
+          {/* Operation Cards */}
+          <div className="space-y-4 mb-8">
+            <OperationCard operation="addition" onClick={() => handleOperationSelect("addition")} />
+            <OperationCard operation="subtraction" onClick={() => handleOperationSelect("subtraction")} />
+            <OperationCard operation="multiplication" onClick={() => handleOperationSelect("multiplication")} />
+            <OperationCard operation="division" onClick={() => handleOperationSelect("division")} />
+          </div>
+
+          {/* Features Section */}
+          <div className="bg-card rounded-3xl p-6 shadow-lg mb-8">
+            <h2 className="text-xl font-bold text-foreground mb-4 text-center">Why Kids Love Us</h2>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col items-center text-center p-3">
+                <div className="w-12 h-12 bg-addition/10 rounded-full flex items-center justify-center mb-2">
+                  <Zap className="w-6 h-6 text-addition" />
+                </div>
+                <span className="text-sm font-semibold text-foreground">Instant Feedback</span>
+              </div>
+              <div className="flex flex-col items-center text-center p-3">
+                <div className="w-12 h-12 bg-subtraction/10 rounded-full flex items-center justify-center mb-2">
+                  <Trophy className="w-6 h-6 text-subtraction" />
+                </div>
+                <span className="text-sm font-semibold text-foreground">Track Progress</span>
+              </div>
+              <div className="flex flex-col items-center text-center p-3">
+                <div className="w-12 h-12 bg-multiplication/10 rounded-full flex items-center justify-center mb-2">
+                  <Shield className="w-6 h-6 text-multiplication" />
+                </div>
+                <span className="text-sm font-semibold text-foreground">Safe for Kids</span>
+              </div>
+              <div className="flex flex-col items-center text-center p-3">
+                <div className="w-12 h-12 bg-division/10 rounded-full flex items-center justify-center mb-2">
+                  <Sparkles className="w-6 h-6 text-division" />
+                </div>
+                <span className="text-sm font-semibold text-foreground">Fun to Learn</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Testimonial */}
+          <div className="bg-gradient-to-br from-addition/10 to-multiplication/10 rounded-2xl p-5 mb-8">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 bg-addition rounded-full flex items-center justify-center text-white font-bold shrink-0">
+                S
+              </div>
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-bold text-foreground">Sarah M.</span>
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 text-subtraction fill-subtraction" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  "My daughter's math grades improved so much! She actually enjoys practicing now."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Store Buttons */}
+          <div className="pt-4 border-t border-border">
+            <p className="text-center text-muted-foreground mb-4 font-nunito font-semibold">
+              Download the full app - It's FREE!
+            </p>
+            <StoreButtons />
+          </div>
         </div>
       </div>
     </div>

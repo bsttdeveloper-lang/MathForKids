@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { Check, X } from "lucide-react";
-import { Question, getOperationSymbol } from "@/lib/mathUtils";
+import { Question, getOperationSymbol, formatNumber } from "@/lib/mathUtils";
 
 interface QuestionCardProps {
   question: Question;
   onAnswer: (answer: string) => void;
+  wholeNumbersOnly: boolean;
 }
 
-const QuestionCard = ({ question, onAnswer }: QuestionCardProps) => {
+const QuestionCard = ({ question, onAnswer, wholeNumbersOnly }: QuestionCardProps) => {
   const [inputValue, setInputValue] = useState(question.userAnswer);
-  const [hasShake, setHasShake] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setInputValue(value);
+    // Only allow numbers, decimal point, and minus sign
+    if (/^-?\d*\.?\d*$/.test(value) || value === "") {
+      setInputValue(value);
+    }
   };
 
   const handleSubmit = () => {
@@ -33,22 +36,20 @@ const QuestionCard = ({ question, onAnswer }: QuestionCardProps) => {
   };
 
   return (
-    <div className={`
-      bg-card rounded-2xl p-5 border-2 border-border shadow-sm
-      transition-all duration-200 ${hasShake ? 'animate-shake' : ''}
-    `}>
+    <div className="bg-card rounded-2xl p-5 border-2 border-border shadow-sm transition-all duration-200">
       <p className="text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">
         Question {question.id}
       </p>
       
       <div className="flex items-center gap-3">
         <span className="text-4xl font-bold text-foreground">
-          {question.num1} {getOperationSymbol(question.operation)} {question.num2} =
+          {formatNumber(question.num1, wholeNumbersOnly)} {getOperationSymbol(question.operation)} {formatNumber(question.num2, wholeNumbersOnly)} =
         </span>
         
         <div className="relative flex items-center gap-2">
           <input
             type="text"
+            inputMode="decimal"
             value={question.isAnswered ? question.userAnswer : inputValue}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}

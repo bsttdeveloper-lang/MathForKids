@@ -27,14 +27,22 @@ export const getOperationSymbol = (operation: Operation): string => {
 export const calculateAnswer = (num1: number, num2: number, operation: Operation): number => {
   switch (operation) {
     case "addition":
-      return num1 + num2;
+      return Math.round((num1 + num2) * 10) / 10;
     case "subtraction":
-      return num1 - num2;
+      return Math.round((num1 - num2) * 10) / 10;
     case "multiplication":
-      return num1 * num2;
+      return Math.round((num1 * num2) * 10) / 10;
     case "division":
-      return num1 / num2;
+      return Math.round((num1 / num2) * 10) / 10;
   }
+};
+
+export const formatNumber = (num: number, wholeNumbersOnly: boolean): string => {
+  if (wholeNumbersOnly) {
+    return Math.round(num).toString();
+  }
+  // Always show 1 decimal place for decimal mode
+  return num.toFixed(1);
 };
 
 export const generateQuestions = (
@@ -49,8 +57,8 @@ export const generateQuestions = (
     let num2: number;
 
     if (wholeNumbersOnly) {
+      // Whole numbers mode
       if (operation === "division") {
-        // Ensure clean division
         num2 = Math.floor(Math.random() * 9) + 1;
         num1 = num2 * (Math.floor(Math.random() * 10) + 1);
       } else if (operation === "subtraction") {
@@ -61,13 +69,21 @@ export const generateQuestions = (
         num2 = Math.floor(Math.random() * 12) + 1;
       }
     } else {
-      // Decimal numbers
-      if (operation === "division") {
-        num2 = Math.floor(Math.random() * 9) + 1;
-        num1 = num2 * (Math.floor(Math.random() * 10) + 1);
+      // Decimal mode - generate numbers with 1 decimal place like 8.9, 10.1, etc.
+      if (operation === "addition") {
+        num1 = Math.round((Math.random() * 19 + 0.1) * 10) / 10;
+        num2 = Math.round((Math.random() * 19 + 0.1) * 10) / 10;
+      } else if (operation === "subtraction") {
+        num1 = Math.round((Math.random() * 19 + 5) * 10) / 10;
+        num2 = Math.round((Math.random() * (num1 - 0.1) + 0.1) * 10) / 10;
+      } else if (operation === "multiplication") {
+        num1 = Math.floor(Math.random() * 9) + 2;
+        num2 = Math.floor(Math.random() * 9) + 2;
       } else {
-        num1 = Math.round((Math.random() * 20 + 0.1) * 10) / 10;
-        num2 = Math.round((Math.random() * 20 + 0.1) * 10) / 10;
+        // Division - ensure clean results
+        num2 = Math.floor(Math.random() * 9) + 2;
+        const result = Math.floor(Math.random() * 9) + 2;
+        num1 = num2 * result;
       }
     }
 

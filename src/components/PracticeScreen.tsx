@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import QuestionCard from "@/components/QuestionCard";
 import { Operation, Question } from "@/lib/mathUtils";
 
 interface PracticeScreenProps {
   operation: Operation;
   questions: Question[];
+  wholeNumbersOnly: boolean;
   onBack: () => void;
   onReset: () => void;
   onAnswer: (questionId: number, answer: string) => void;
@@ -22,6 +22,7 @@ const operationColors = {
 const PracticeScreen = ({
   operation,
   questions,
+  wholeNumbersOnly,
   onBack,
   onReset,
   onAnswer,
@@ -91,6 +92,7 @@ const PracticeScreen = ({
             <QuestionCard
               key={question.id}
               question={question}
+              wholeNumbersOnly={wholeNumbersOnly}
               onAnswer={(answer) => onAnswer(question.id, answer)}
             />
           ))}
