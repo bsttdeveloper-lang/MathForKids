@@ -5,7 +5,7 @@ const StoreButtons = () => {
     <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
       {/* App Store Button */}
       <button
-        onClick={() => window.open('https://apps.apple.com', '_blank')}
+        onClick={() => window.open('https://apps.apple.com/at/app/worktimehours/id6756219701?l=en-GB')}
         className="w-full sm:w-auto bg-foreground text-background rounded-xl px-5 py-3 flex items-center justify-center gap-3 hover:opacity-90 transition-opacity"
       >
         <Apple className="w-7 h-7" />
