@@ -8,7 +8,7 @@ interface QuestionCardProps {
   wholeNumbersOnly: boolean;
 }
 
-const QuestionCard = ({ question, onAnswer, wholeNumbersOnly }: QuestionCardProps) => {
+const QuestionCard: React.FC<QuestionCardProps> = ({ question, onAnswer, wholeNumbersOnly }) => {
   const [inputValue, setInputValue] = useState(question.userAnswer);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
