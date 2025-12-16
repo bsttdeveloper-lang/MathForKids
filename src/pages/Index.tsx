@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
-import { Users, Trophy, Sparkles, Shield, Zap } from "lucide-react";
+import { Trophy, Sparkles, Shield, Zap } from "lucide-react";
 import OperationCard from "@/components/OperationCard";
 import PracticeScreen from "@/components/PracticeScreen";
 import DifficultySelect from "@/components/DifficultySelect";
-import StoreButtons from "@/components/StoreButtons";
-import StarRating from "@/components/StarRating";
-import FeedbackForm from "@/components/FeedbackForm";
-import FeedbackList from "@/components/FeedbackList";
 import { Operation, generateQuestions, Question } from "@/lib/mathUtils";
 
 const Index = () => {
@@ -104,7 +100,7 @@ const Index = () => {
         <div className="container max-w-md mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-addition/10 text-addition px-4 py-2 rounded-full mb-4">
             <Sparkles className="w-4 h-4" />
-            <span className="text-sm font-bold">#1 Math App for Kids</span>
+            <span className="text-sm font-bold">Math Practice</span>
           </div>
           
           <h1 className="text-4xl md:text-5xl font-extrabold text-primary font-nunito mb-3">
@@ -113,19 +109,6 @@ const Index = () => {
           <p className="text-lg text-muted-foreground font-nunito mb-6">
             Choose an operation to practice
           </p>
-
-          {/* Trust Badges */}
-          <div className="flex flex-wrap justify-center gap-4 mb-6">
-            <StarRating />
-            <div className="flex items-center gap-1.5 bg-card px-3 py-1.5 rounded-full shadow-sm">
-              <Users className="w-4 h-4 text-multiplication" />
-              <span className="text-sm font-bold text-foreground">2M+ Kids</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-card px-3 py-1.5 rounded-full shadow-sm">
-              <Trophy className="w-4 h-4 text-addition" />
-              <span className="text-sm font-bold text-foreground">Top Rated</span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -182,21 +165,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Feedback Section */}
-          <div className="mb-6">
-            <div className="flex justify-center mb-4">
-              <FeedbackForm />
-            </div>
-            <FeedbackList />
-          </div>
-
-          {/* Store Buttons */}
-          <div className="pt-4 border-t border-border">
-            <p className="text-center text-muted-foreground mb-4 font-nunito font-semibold">
-              Download the full app
-            </p>
-            <StoreButtons />
-          </div>
         </div>
       </div>
     </div>
