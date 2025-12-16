@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
-import { Star, Users, Trophy, Sparkles, Shield, Zap } from "lucide-react";
+import { Users, Trophy, Sparkles, Shield, Zap } from "lucide-react";
 import OperationCard from "@/components/OperationCard";
 import PracticeScreen from "@/components/PracticeScreen";
 import StoreButtons from "@/components/StoreButtons";
+import StarRating from "@/components/StarRating";
+import FeedbackForm from "@/components/FeedbackForm";
+import FeedbackList from "@/components/FeedbackList";
 import { Operation, generateQuestions, Question } from "@/lib/mathUtils";
 
 const Index = () => {
@@ -79,14 +82,7 @@ const Index = () => {
 
           {/* Trust Badges */}
           <div className="flex flex-wrap justify-center gap-4 mb-6">
-            <div className="flex items-center gap-1.5 bg-card px-3 py-1.5 rounded-full shadow-sm">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-subtraction fill-subtraction" />
-                ))}
-              </div>
-              <span className="text-sm font-bold text-foreground">4.9</span>
-            </div>
+            <StarRating />
             <div className="flex items-center gap-1.5 bg-card px-3 py-1.5 rounded-full shadow-sm">
               <Users className="w-4 h-4 text-multiplication" />
               <span className="text-sm font-bold text-foreground">2M+ Kids</span>
@@ -122,7 +118,7 @@ const Index = () => {
           </div>
 
           {/* Features Section */}
-          <div className="bg-card rounded-3xl p-6 shadow-lg mb-8">
+          <div className="bg-card rounded-3xl p-6 shadow-lg mb-6">
             <h2 className="text-xl font-bold text-foreground mb-4 text-center">Why Kids Love Us</h2>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col items-center text-center p-3">
@@ -150,6 +146,14 @@ const Index = () => {
                 <span className="text-sm font-semibold text-foreground">Fun to Learn</span>
               </div>
             </div>
+          </div>
+
+          {/* Feedback Section */}
+          <div className="mb-6">
+            <div className="flex justify-center mb-4">
+              <FeedbackForm />
+            </div>
+            <FeedbackList />
           </div>
 
           {/* Store Buttons */}
