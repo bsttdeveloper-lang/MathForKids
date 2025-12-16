@@ -77,13 +77,14 @@ export const generateQuestions = (
         num1 = Math.round((Math.random() * 19 + 5) * 10) / 10;
         num2 = Math.round((Math.random() * (num1 - 0.1) + 0.1) * 10) / 10;
       } else if (operation === "multiplication") {
-        num1 = Math.floor(Math.random() * 9) + 2;
-        num2 = Math.floor(Math.random() * 9) + 2;
+        // Generate decimals like 0.5 × 0.4, 1.6 × 3.8, etc.
+        num1 = Math.round((Math.random() * 3.9 + 0.1) * 10) / 10;
+        num2 = Math.round((Math.random() * 3.9 + 0.1) * 10) / 10;
       } else {
-        // Division - ensure clean results
-        num2 = Math.floor(Math.random() * 9) + 2;
-        const result = Math.floor(Math.random() * 9) + 2;
-        num1 = num2 * result;
+        // Division with decimals - ensure reasonable results
+        num2 = Math.round((Math.random() * 3.9 + 0.1) * 10) / 10;
+        const result = Math.round((Math.random() * 3.9 + 0.1) * 10) / 10;
+        num1 = Math.round((num2 * result) * 10) / 10;
       }
     }
 
